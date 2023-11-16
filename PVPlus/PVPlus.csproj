@@ -259,6 +259,11 @@
     <PackageReference Include="Flee">
       <Version>1.2.2</Version>
     </PackageReference>
+    <PackageReference Include="nuget.commandline">
+      <Version>6.7.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="squirrel.windows">
       <Version>2.0.1</Version>
     </PackageReference>
@@ -270,6 +275,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Releases\PVPlus-1.0.3-full.nupkg" />
+    <None Include="Releases\PVPlus-1.0.4-delta.nupkg" />
+    <None Include="Releases\PVPlus-1.0.4-full.nupkg" />
+    <None Include="Releases\RELEASES" />
+    <None Include="Releases\Setup.msi" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -282,6 +292,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Releases\Setup.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
