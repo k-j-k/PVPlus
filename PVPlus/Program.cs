@@ -12,6 +12,8 @@ namespace PVPlus
 {
     class Program
     {
+        //Squirrel --releasify PVPlus.1.0.0.nupkg
+
         [STAThread]
         static void Main(string[] args)
         {

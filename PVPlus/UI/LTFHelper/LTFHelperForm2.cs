@@ -522,7 +522,7 @@ namespace PVPlus.UI
             }
             else if (e.ClickedItem.Text == "Help")
             {
-                System.Diagnostics.Process.Start(@"UI\LTFHelper\Help.txt");
+
             }
         }
 
