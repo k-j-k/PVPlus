@@ -18,8 +18,6 @@ namespace Test
 
             Console.WriteLine(command1);
             Console.WriteLine(command2);
-            Console.WriteLine();
-
             Console.ReadLine();
         }
     }
