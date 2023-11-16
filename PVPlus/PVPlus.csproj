@@ -275,9 +275,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Releases\PVPlus-1.0.3-full.nupkg" />
-    <None Include="Releases\PVPlus-1.0.4-delta.nupkg" />
-    <None Include="Releases\PVPlus-1.0.4-full.nupkg" />
+    <None Include="Releases\PVPlus-1.0.5-full.nupkg" />
     <None Include="Releases\RELEASES" />
     <None Include="Releases\Setup.msi" />
   </ItemGroup>

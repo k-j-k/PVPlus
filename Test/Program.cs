@@ -12,12 +12,13 @@ namespace Test
         {
             string ver = typeof(PVPlus.MainPVForm).Assembly.GetName().Version.ToString(3);
 
-            string command1 = $@"nuget pack PVPlus.nuspec -Version {ver} -Properties Configuration=Release -BasePath PVPlus\bin\Release\";
-            string command2 = $@"squirrel --releasify PVPlus.{ver}.nupkg";
+            string command1 = $@"nuget pack PVPlus.nuspec -Version {ver} -Properties Configuration=Release -BasePath PVPlus\bin\Release\;";
+            string command2 = $@"squirrel --releasify PVPlus.{ver}.nupkg;";
 
 
             Console.WriteLine(command1);
             Console.WriteLine(command2);
+            Console.WriteLine();
 
             Console.ReadLine();
         }
