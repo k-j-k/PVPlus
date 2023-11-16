@@ -18,7 +18,6 @@ namespace PVPlus
         static void Main(string[] args)
         {
             Application.Run(new UI.MainForm());
-            var a = 3;
         }
     }
 
