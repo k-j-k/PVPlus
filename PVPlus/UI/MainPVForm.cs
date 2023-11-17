@@ -11,6 +11,9 @@ using System.IO;
 using System.Diagnostics;
 using PVPlus.RULES;
 using PVPlus.PVCALCULATOR;
+using Squirrel;
+using System.Net;
+using System.Reflection;
 
 namespace PVPlus
 {
@@ -422,5 +425,6 @@ namespace PVPlus
                 ReportExeption(ex);
             }
         }
+
     }
 }

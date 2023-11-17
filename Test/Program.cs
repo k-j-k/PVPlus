@@ -17,12 +17,16 @@ namespace Test
             string command3 = $@"git add Releases\RELEASES -f;";
             string command4 = $@"git add Releases\PVPlus-{ver}-full.nupkg -f;";
             string command5 = $@"git add Releases\PVPlus-{ver}-delta.nupkg -f;";
+            string command6 = $"git commit -m \"updated\";";
+            string command7 = $"git push origin master;";
 
             Console.WriteLine(command1);
             Console.WriteLine(command2);
             Console.WriteLine(command3);
             Console.WriteLine(command4);
             Console.WriteLine(command5);
+            Console.WriteLine(command6);
+            Console.WriteLine(command7);
 
             Console.ReadLine();
         }
