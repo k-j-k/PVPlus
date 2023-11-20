@@ -44,7 +44,7 @@ namespace PVPlus
         {
             string productCode = Configure.ProductCode;
             TableType tableType = Configure.TableType;
-
+            
             try
             {
                 SetData();

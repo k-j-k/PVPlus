@@ -43,11 +43,11 @@
             this.TextBoxDelimiter = new System.Windows.Forms.TextBox();
             this.checkBox구분자 = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ExcessLimitChkBtn = new System.Windows.Forms.Button();
             this.checkBoxLimitCheck = new System.Windows.Forms.CheckBox();
             this.radioButtonS = new System.Windows.Forms.RadioButton();
             this.radioButtonV = new System.Windows.Forms.RadioButton();
             this.radioButtonP = new System.Windows.Forms.RadioButton();
+            this.ExcessLimitChkBtn = new System.Windows.Forms.Button();
             this.textBoxProduct = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btn시작 = new System.Windows.Forms.Button();
@@ -65,6 +65,8 @@
             this.labelFileOpen = new System.Windows.Forms.Label();
             this.comboBoxFileOpen = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -198,20 +200,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "테이블유형";
             // 
-            // ExcessLimitChkBtn
-            // 
-            this.ExcessLimitChkBtn.BackColor = System.Drawing.SystemColors.Info;
-            this.ExcessLimitChkBtn.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExcessLimitChkBtn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.ExcessLimitChkBtn.Location = new System.Drawing.Point(16, 55);
-            this.ExcessLimitChkBtn.Name = "ExcessLimitChkBtn";
-            this.ExcessLimitChkBtn.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ExcessLimitChkBtn.Size = new System.Drawing.Size(70, 30);
-            this.ExcessLimitChkBtn.TabIndex = 4;
-            this.ExcessLimitChkBtn.Text = "신계약비";
-            this.ExcessLimitChkBtn.UseVisualStyleBackColor = false;
-            this.ExcessLimitChkBtn.Click += new System.EventHandler(this.ExcessLimitChkBtn_Click);
-            // 
             // checkBoxLimitCheck
             // 
             this.checkBoxLimitCheck.AutoSize = true;
@@ -257,6 +245,20 @@
             this.radioButtonP.Text = "P";
             this.radioButtonP.UseVisualStyleBackColor = true;
             this.radioButtonP.CheckedChanged += new System.EventHandler(this.radioButtonP_CheckedChanged);
+            // 
+            // ExcessLimitChkBtn
+            // 
+            this.ExcessLimitChkBtn.BackColor = System.Drawing.SystemColors.Info;
+            this.ExcessLimitChkBtn.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExcessLimitChkBtn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ExcessLimitChkBtn.Location = new System.Drawing.Point(16, 55);
+            this.ExcessLimitChkBtn.Name = "ExcessLimitChkBtn";
+            this.ExcessLimitChkBtn.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.ExcessLimitChkBtn.Size = new System.Drawing.Size(70, 30);
+            this.ExcessLimitChkBtn.TabIndex = 4;
+            this.ExcessLimitChkBtn.Text = "신계약비";
+            this.ExcessLimitChkBtn.UseVisualStyleBackColor = false;
+            this.ExcessLimitChkBtn.Click += new System.EventHandler(this.ExcessLimitChkBtn_Click);
             // 
             // textBoxProduct
             // 
@@ -340,6 +342,7 @@
             this.textBoxStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxStatus.Size = new System.Drawing.Size(685, 89);
             this.textBoxStatus.TabIndex = 18;
+            this.textBoxStatus.TextChanged += new System.EventHandler(this.textBoxStatus_TextChanged);
             // 
             // lblStatus
             // 
@@ -384,7 +387,7 @@
             // btnEvaluateSInfos
             // 
             this.btnEvaluateSInfos.BackColor = System.Drawing.SystemColors.Info;
-            this.btnEvaluateSInfos.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEvaluateSInfos.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEvaluateSInfos.ForeColor = System.Drawing.Color.Black;
             this.btnEvaluateSInfos.Location = new System.Drawing.Point(16, 20);
             this.btnEvaluateSInfos.Name = "btnEvaluateSInfos";
@@ -425,12 +428,31 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "한도계산";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 12);
+            this.label6.TabIndex = 27;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(6, 9);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(0, 12);
+            this.linkLabel1.TabIndex = 28;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // MainPVForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(794, 501);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.comboBoxFileOpen);
             this.Controls.Add(this.labelFileOpen);
@@ -509,5 +531,7 @@
         private System.Windows.Forms.ComboBox comboBoxFileOpen;
         private System.Windows.Forms.Button ExcessLimitChkBtn;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

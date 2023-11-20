@@ -12,6 +12,8 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+using System.Diagnostics;
 
 namespace PVPlus.UI
 {
@@ -75,8 +77,6 @@ namespace PVPlus.UI
             samplePVForm.LoadConfigureData();
 
             InitSize = new Size(Size.Width, Size.Height);
-
-            Patch();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -103,6 +103,7 @@ namespace PVPlus.UI
             if (tabControl1.SelectedTab.Text == "MainPV") AddForm(tabControl1.SelectedTab, mainPVForm);
             if (tabControl1.SelectedTab.Text == "Sample") AddForm(tabControl1.SelectedTab, samplePVForm);
             if (tabControl1.SelectedTab.Text == "LTFHelper") AddForm(tabControl1.SelectedTab, ltfHelperForm2);
+
         }
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
@@ -115,73 +116,5 @@ namespace PVPlus.UI
             //paddedBounds.Offset(1, yOffset);
             //TextRenderer.DrawText(e.Graphics, page.Text, e.Font, paddedBounds, page.ForeColor);
         }
-
-        private async void Patch()
-        {
-            DirectoryInfo rootPath = new DirectoryInfo(Application.StartupPath).Parent.CreateSubdirectory("PatchFiles");
-
-            try
-            {
-                WebClient client = new WebClient();
-                client.DownloadFile("https://github.com/k-j-k/PVPlus/raw/master/Releases/RELEASES", $@"{rootPath.FullName}\RELEASES");
-
-                List<string> releaseList = new List<string>();
-
-                using (StreamReader sr = new StreamReader($@"{rootPath.FullName}\RELEASES"))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        releaseList.Add(sr.ReadLine());
-                    }
-                }
-
-                string AppName = Assembly.GetExecutingAssembly().GetName().Name;
-
-                List<Version> releaseVersions = releaseList
-                    .Select(x => new Version(x.Split(' ')[1].Split('-')[1]))
-                    .Distinct()
-                    .OrderBy(x => x).ToList();
-
-                Version currendVersion = Assembly.GetExecutingAssembly().GetName().Version;
-                Version lastestVersion = releaseVersions.Last();
-
-                if (currendVersion <= lastestVersion)
-                {
-                    DialogResult dialogResult = MessageBox.Show(text: $"새 버전 {lastestVersion}이 확인 되었습니다. 패치를 진행 하시겠습니까?", buttons: MessageBoxButtons.YesNo, icon: MessageBoxIcon.Information, caption: "패치안내");
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        try
-                        {
-                            client.DownloadFile($"https://github.com/k-j-k/PVPlus/raw/master/Releases/{AppName}-{lastestVersion}-delta.nupkg", $@"{rootPath.FullName}\{AppName}-{lastestVersion}-delta.nupkg");
-                            client.DownloadFile($"https://github.com/k-j-k/PVPlus/raw/master/Releases/{AppName}-{lastestVersion}-full.nupkg", $@"{rootPath.FullName}\{AppName}-{lastestVersion}-full.nupkg");
-                            client.DownloadFile("https://github.com/k-j-k/PVPlus/raw/master/Releases/RELEASES", $@"{rootPath.FullName}\RELEASES");
-
-                            using (var mgr = new UpdateManager(rootPath.FullName))
-                            {
-                                await mgr.UpdateApp();
-                            }
-
-                            MessageBox.Show(text: "패치가 완료되었습니다. 재시작시 변경사항이 적용됩니다.", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information, caption: "패치완료");
-                        }
-                        catch
-                        {
-                            MessageBox.Show(text: "예상치 못한 사유로 패치를 진행하지 못 했습니다.", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information, caption: "패치실패");
-                        }
-                    }
-                }
-                else
-                {
-
-                }
-            }
-            catch
-            {
-
-            }
-
-
-        }
-
-
     }
 }

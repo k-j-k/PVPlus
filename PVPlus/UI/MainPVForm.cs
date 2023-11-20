@@ -14,6 +14,8 @@ using PVPlus.PVCALCULATOR;
 using Squirrel;
 using System.Net;
 using System.Reflection;
+using PVPlus.UI;
+using System.Configuration;
 
 namespace PVPlus
 {
@@ -162,6 +164,8 @@ namespace PVPlus
 
             string[] openFiles = new string[] { " ", "작업폴더", "검증폴더", "테이블원본", "정상건", "오차건", "오차건원본", "오류건", "SInfo계산값", "SInfo한도계산값" };
             comboBoxFileOpen.Items.AddRange(openFiles);
+
+            CheckVersion();
         }
 
         private void MainPVForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -426,5 +430,146 @@ namespace PVPlus
             }
         }
 
+        private void textBoxStatus_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public Version LastestVersion { get; set; }
+
+        public Version CurrentVersion { get; set; }
+
+        private void CheckVersion()
+        {
+            DirectoryInfo rootPath = new DirectoryInfo(Application.StartupPath).Parent.CreateSubdirectory("PatchFiles");
+
+            if (new FileInfo($@"{Path.GetTempPath()}\userTemp.config").Exists)
+            {
+                SaveConfigureData();
+                mainForm.samplePVForm.SaveConfigureData();
+                GetSetting();
+                new FileInfo($@"{Path.GetTempPath()}\userTemp.config").Delete();
+                Properties.Settings.Default.Upgrade();
+                LoadConfigureData();
+                mainForm.samplePVForm.LoadConfigureData();
+            }
+
+            try
+            {
+                WebClient client = new WebClient();
+                client.DownloadFile("https://github.com/k-j-k/PVPlus/raw/master/Releases/RELEASES", $@"{rootPath.FullName}\RELEASES");
+
+                List<string> releaseList = new List<string>();
+
+                using (StreamReader sr = new StreamReader($@"{rootPath.FullName}\RELEASES"))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        releaseList.Add(sr.ReadLine());
+                    }
+                }
+
+                string AppName = Assembly.GetExecutingAssembly().GetName().Name;
+
+                List<Version> releaseVersions = releaseList
+                    .Select(x => new Version(x.Split(' ')[1].Split('-')[1]))
+                    .Distinct()
+                    .OrderBy(x => x).ToList();
+
+                CurrentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+                LastestVersion = releaseVersions.Last();
+
+
+                if (CurrentVersion <= LastestVersion)
+                {
+                    linkLabel1.Text = $"v{LastestVersion.ToString(3)} 패치";
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private async void Patch()
+        {
+            WebClient client = new WebClient();
+            DialogResult dialogResult = MessageBox.Show(text: $"새 버전 v{LastestVersion}이 확인 되었습니다. 패치를 진행 하시겠습니까?", buttons: MessageBoxButtons.YesNo, icon: MessageBoxIcon.Information, caption: "패치안내");
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                DirectoryInfo rootPath = new DirectoryInfo(Application.StartupPath).Parent.CreateSubdirectory("PatchFiles");
+                string AppName = Assembly.GetExecutingAssembly().GetName().Name;
+
+                if (new FileInfo($@"{Path.GetTempPath()}\userTemp.config").Exists)
+                {
+                    SaveConfigureData();
+                    mainForm.samplePVForm.SaveConfigureData();
+                    GetSetting();
+                    new FileInfo($@"{Path.GetTempPath()}\userTemp.config").Delete();
+                    Properties.Settings.Default.Upgrade();
+                    LoadConfigureData();
+                    mainForm.samplePVForm.LoadConfigureData();
+                }
+
+                try
+                {
+                    client.DownloadFile($"https://github.com/k-j-k/PVPlus/raw/master/Releases/{AppName}-{LastestVersion}-delta.nupkg", $@"{rootPath.FullName}\{AppName}-{LastestVersion}-delta.nupkg");
+                    client.DownloadFile($"https://github.com/k-j-k/PVPlus/raw/master/Releases/{AppName}-{LastestVersion}-full.nupkg", $@"{rootPath.FullName}\{AppName}-{LastestVersion}-full.nupkg");
+                    client.DownloadFile("https://github.com/k-j-k/PVPlus/raw/master/Releases/RELEASES", $@"{rootPath.FullName}\RELEASES");
+                    SetSetting();
+
+                    using (var mgr = new UpdateManager(rootPath.FullName))
+                    {
+                        await mgr.UpdateApp();
+                    }
+
+                    MessageBox.Show(text: "패치가 완료되었습니다. 재시작시 변경사항이 적용됩니다.", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information, caption: "패치완료");
+
+                    Close();
+
+                    UpdateManager.RestartApp();
+                }
+                catch
+                {
+                    MessageBox.Show(text: "예상치 못한 사유로 패치를 진행하지 못 했습니다.", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information, caption: "패치실패");
+                }
+            }
+
+
+
+        }
+
+        private static void GetSetting()
+        {
+            try
+            {
+                if (new FileInfo($@"{Path.GetTempPath()}\userTemp.config").Exists)
+                {
+                    new FileInfo($@"{Path.GetTempPath()}\userTemp.config").CopyTo(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath, true);
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private static void SetSetting()
+        {
+            try
+            {
+                new FileInfo(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath).CopyTo($@"{Path.GetTempPath()}\userTemp.config", true);
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Patch();
+        }
     }
 }
