@@ -58,7 +58,7 @@ namespace PVPlus.UI
         private void MainForm_Load(object sender, EventArgs e)
         {
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            Text = $"PVPLUS v{version}";
+            Text = $"PVPLUS v{version.ToString(3)}";
 
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.TabPages[0].Text = "MainPV";

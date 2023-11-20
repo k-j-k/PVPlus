@@ -435,6 +435,7 @@ namespace PVPlus
 
         }
 
+        #region Patch
         public Version LastestVersion { get; set; }
 
         public Version CurrentVersion { get; set; }
@@ -571,5 +572,6 @@ namespace PVPlus
         {
             Patch();
         }
+        #endregion
     }
 }
