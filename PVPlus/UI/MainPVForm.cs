@@ -444,17 +444,6 @@ namespace PVPlus
         {
             DirectoryInfo rootPath = new DirectoryInfo(Application.StartupPath).Parent.CreateSubdirectory("PatchFiles");
 
-            if (new FileInfo($@"{Path.GetTempPath()}\userTemp.config").Exists)
-            {
-                SaveConfigureData();
-                mainForm.samplePVForm.SaveConfigureData();
-                GetSetting();
-                new FileInfo($@"{Path.GetTempPath()}\userTemp.config").Delete();
-                Properties.Settings.Default.Upgrade();
-                LoadConfigureData();
-                mainForm.samplePVForm.LoadConfigureData();
-            }
-
             try
             {
                 WebClient client = new WebClient();
@@ -502,23 +491,11 @@ namespace PVPlus
                 DirectoryInfo rootPath = new DirectoryInfo(Application.StartupPath).Parent.CreateSubdirectory("PatchFiles");
                 string AppName = Assembly.GetExecutingAssembly().GetName().Name;
 
-                if (new FileInfo($@"{Path.GetTempPath()}\userTemp.config").Exists)
-                {
-                    SaveConfigureData();
-                    mainForm.samplePVForm.SaveConfigureData();
-                    GetSetting();
-                    new FileInfo($@"{Path.GetTempPath()}\userTemp.config").Delete();
-                    Properties.Settings.Default.Upgrade();
-                    LoadConfigureData();
-                    mainForm.samplePVForm.LoadConfigureData();
-                }
-
                 try
                 {
                     client.DownloadFile($"https://github.com/k-j-k/PVPlus/raw/master/Releases/{AppName}-{LastestVersion}-delta.nupkg", $@"{rootPath.FullName}\{AppName}-{LastestVersion}-delta.nupkg");
                     client.DownloadFile($"https://github.com/k-j-k/PVPlus/raw/master/Releases/{AppName}-{LastestVersion}-full.nupkg", $@"{rootPath.FullName}\{AppName}-{LastestVersion}-full.nupkg");
                     client.DownloadFile("https://github.com/k-j-k/PVPlus/raw/master/Releases/RELEASES", $@"{rootPath.FullName}\RELEASES");
-                    SetSetting();
 
                     using (var mgr = new UpdateManager(rootPath.FullName))
                     {
@@ -539,33 +516,6 @@ namespace PVPlus
 
 
 
-        }
-
-        private static void GetSetting()
-        {
-            try
-            {
-                if (new FileInfo($@"{Path.GetTempPath()}\userTemp.config").Exists)
-                {
-                    new FileInfo($@"{Path.GetTempPath()}\userTemp.config").CopyTo(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath, true);
-                }
-            }
-            catch
-            {
-
-            }
-        }
-
-        private static void SetSetting()
-        {
-            try
-            {
-                new FileInfo(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath).CopyTo($@"{Path.GetTempPath()}\userTemp.config", true);
-            }
-            catch
-            {
-
-            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

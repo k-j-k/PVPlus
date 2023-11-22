@@ -545,7 +545,7 @@ namespace PVPlus.UI
 
             foreach (TextBox textbox in TextboxSet)
             {
-                Color backColor = ColorSet[colorIdx];
+                Color backColor = ColorSet[colorIdx++];
                 if (textbox.Text == "") continue;
 
                 try
@@ -586,9 +586,12 @@ namespace PVPlus.UI
                             length = positionsByLength[1];
                         }
 
-                        richTextBoxSamples.SelectionStart = start + offset;
-                        richTextBoxSamples.SelectionLength = length;
-                        richTextBoxSamples.SelectionBackColor = backColor;
+                        if (offset + length <= line.Length)
+                        {
+                            richTextBoxSamples.SelectionStart = start + offset;
+                            richTextBoxSamples.SelectionLength = length;
+                            richTextBoxSamples.SelectionBackColor = backColor;
+                        }
 
                         tuples.Add(new Tuple<Color, string>(backColor, richTextBoxSamples.SelectedRtf));
 
@@ -596,10 +599,12 @@ namespace PVPlus.UI
                         lineIdx++;
                     }
 
-                    colorIdx++;
+                    
                 }
 
                 catch { }
+
+                
             }
         }
 
