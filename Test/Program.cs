@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +32,17 @@ namespace Test
 
             Console.ReadLine();
 
+        }
+
+        [Conditional("DEBUG")]
+        static void a()
+        {
+            WebClient web = new WebClient();
+            System.IO.Stream stream = web.OpenRead("https://raw.githubusercontent.com/k-j-k/PVPlus/master/Releases/RELEASES");
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
+            {
+                String text = reader.ReadToEnd();
+            }
         }
     }
 }

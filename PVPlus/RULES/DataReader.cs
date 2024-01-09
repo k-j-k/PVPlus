@@ -333,7 +333,7 @@ namespace PVPlus.RULES
 
         public void GenerateEvaluatedSInfosText(List<SInfo> sList)
         {
-            using (StreamWriter sw = new StreamWriter(evaluatedSFI.FullName, false, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(evaluatedSFI.FullName, false, Encoding.UTF8))
             {
                 sList.ForEach(x => sw.WriteLine(x.ToString()));
             }

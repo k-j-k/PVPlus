@@ -73,6 +73,7 @@ namespace PVPlus
                 double difference = checkResult.Value[2];
 
                 if (Math.Abs(difference) >= 1) ResultType = "오차";
+                if ((checkResult.Key == "GP6" || checkResult.Key == "GP0") && checkResult.Value[0] == 0) ResultType = "오차";
             }
         }
 

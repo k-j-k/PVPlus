@@ -216,7 +216,7 @@ namespace PVPlus
                 List<SInfo> sList = reader.ReadEvaluatedSInfos();
 
                 FileInfo ExcessFI = new FileInfo(Path.Combine(Configure.WorkingDI.FullName, "AlphaExcessCheck.txt"));
-                StreamWriter swAlphaExcessCheck = new StreamWriter(ExcessFI.FullName, false, Encoding.Default);
+                StreamWriter swAlphaExcessCheck = new StreamWriter(ExcessFI.FullName, false, Encoding.UTF8);
 
                 int cnt = 0;
 
@@ -262,7 +262,7 @@ namespace PVPlus
             string tableExtension = tableFI.Extension;
             string tableFullNameWithoutExtension = tableFullName.Replace(tableExtension, "");
 
-            sr = new StreamReader(tableFullName, Encoding.Default);
+            sr = new StreamReader(tableFullName, Encoding.UTF8);
             sw정상건 = new StreamWriter($"{tableFullNameWithoutExtension}_{tableAddName}정상건{tableExtension}");
             sw오차건 = new StreamWriter($"{tableFullNameWithoutExtension}_{tableAddName}오차건{tableExtension}");
             sw오차건원본 = new StreamWriter($"{tableFullNameWithoutExtension}_{tableAddName}오차건원본{tableExtension}");

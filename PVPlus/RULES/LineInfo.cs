@@ -132,9 +132,23 @@ namespace PVPlus.RULES
                         try
                         {
                             string k = kv.Split(new string[] { "->" }, StringSplitOptions.None)[0].Trim();
-                            int v = int.Parse(kv.Split(new string[] { "->" }, StringSplitOptions.None)[1].Trim());
 
-                            variables[k] = v;
+                            if (variables[k].GetType() == typeof(int))
+                            {
+                                variables[k] = int.Parse(kv.Split(new string[] { "->" }, StringSplitOptions.None)[1].Trim());
+                            }
+                            else if (variables[k].GetType() == typeof(double))
+                            {
+                                variables[k] = double.Parse(kv.Split(new string[] { "->" }, StringSplitOptions.None)[1].Trim());
+                            }
+                            else if (variables[k].GetType() == typeof(string))
+                            {
+                                variables[k] = kv.Split(new string[] { "->" }, StringSplitOptions.None)[1].Trim();
+                            }
+                            else
+                            {
+                                throw new Exception($"VarAdd {sInfo.VarAdd}의 형식이 잘 못 되었습니다.");
+                            }
                         }
                         catch
                         {
@@ -359,7 +373,7 @@ namespace PVPlus.RULES
 
             //RiderRule, Variables 변경
             if (otherRiderCode != null) RiderCode = otherRiderCode;
-            SetVariables();
+            //SetVariables();
             otherVariables.Keys.ToList().ForEach(x => variables[x] = otherVariables[x]);
 
             string PVGenKey = GetPVGeneratorKey();

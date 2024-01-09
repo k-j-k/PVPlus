@@ -41,7 +41,7 @@ namespace PVPlus.UI
         {
             List<string> result = new List<string>();
 
-            using (StreamReader sr = new StreamReader(FilePath, Encoding.Default))
+            using (StreamReader sr = new StreamReader(FilePath, Encoding.UTF8))
             {
                 while (!sr.EndOfStream)
                 {
@@ -54,7 +54,7 @@ namespace PVPlus.UI
         public void Sample(string key)
         {
             DirectoryInfo di = CreatetDirectory("Samples");
-            using (StreamWriter sw = new StreamWriter(Path.Combine(di.FullName, key + _extension), false, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(Path.Combine(di.FullName, key + _extension), false, Encoding.UTF8))
             {
                 GetValueByLine(key).ForEach(x => sw.WriteLine(x));
             }
@@ -66,7 +66,7 @@ namespace PVPlus.UI
             DirectoryInfo di = CreatetDirectory("Samples");
             FileInfo fi = CreateFileInfo(type, di);
 
-            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.UTF8))
             {
                 foreach (string s in keys)
                 {
@@ -81,7 +81,7 @@ namespace PVPlus.UI
             DirectoryInfo di = CreatetDirectory("Sorted");
             FileInfo fi = CreateFileInfo(type, di);
 
-            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.UTF8))
             {
                 List<string> sortedKeyList = GetKeyList().OrderBy(x => x).ToList();
                 foreach (string key in sortedKeyList)
@@ -100,7 +100,7 @@ namespace PVPlus.UI
             DirectoryInfo di = CreatetDirectory("Sorted");
             FileInfo fi = CreateFileInfo(type, di);
 
-            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.UTF8))
             {
                 List<string> sortedKeyList = GetKeyList().OrderBy(x => x).ToList();
                 foreach (string key in sortedKeyList)
@@ -133,7 +133,7 @@ namespace PVPlus.UI
 
             foreach (IGrouping<object, object> group in groupCollection)
             {
-                using (StreamWriter sw = new StreamWriter(Path.Combine(di.FullName, group.Key + _extension), true, Encoding.Default))
+                using (StreamWriter sw = new StreamWriter(Path.Combine(di.FullName, group.Key + _extension), true, Encoding.UTF8))
                 {
                     foreach (object[] line in group)
                     {
@@ -153,7 +153,7 @@ namespace PVPlus.UI
             DirectoryInfo di = CreatetDirectory("Joined");
             FileInfo fi = CreateFileInfo(type, di);
 
-            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.UTF8))
             {
                 foreach (string key in GetKeyList())
                 {
@@ -177,7 +177,7 @@ namespace PVPlus.UI
             DirectoryInfo di = CreatetDirectory("Joined");
             FileInfo fi = CreateFileInfo(type, di);
 
-            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.UTF8))
             {
                 foreach (string key in GetKeyList())
                 {
@@ -202,7 +202,7 @@ namespace PVPlus.UI
             DirectoryInfo di = CreatetDirectory("Splited");
             di.GetFiles().ToList().ForEach(x => x.Delete());
 
-            using (StreamReader sr = new StreamReader(FilePath, Encoding.Default))
+            using (StreamReader sr = new StreamReader(FilePath, Encoding.UTF8))
             {
                 while (!sr.EndOfStream)
                 {
@@ -211,7 +211,7 @@ namespace PVPlus.UI
 
                     foreach (IGrouping<string, string> group in groupCollection)
                     {
-                        using (StreamWriter sw = new StreamWriter(Path.Combine(di.FullName, group.Key + _extension), true, Encoding.Default))
+                        using (StreamWriter sw = new StreamWriter(Path.Combine(di.FullName, group.Key + _extension), true, Encoding.UTF8))
                         {
                             foreach (string line in group)
                             {
@@ -232,8 +232,8 @@ namespace PVPlus.UI
             DirectoryInfo di = CreatetDirectory(type);
             FileInfo fi = CreateFileInfo(type, di);
 
-            using (StreamReader sr = new StreamReader(FilePath, Encoding.Default))
-            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.Default))
+            using (StreamReader sr = new StreamReader(FilePath, Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.UTF8))
             {
                 while (!sr.EndOfStream)
                 {
@@ -256,8 +256,8 @@ namespace PVPlus.UI
             FileInfo fi = CreateFileInfo(type, di);
             Dictionary<string, long> Counter = new Dictionary<string, long>();
 
-            using (StreamReader sr = new StreamReader(FilePath, Encoding.Default))
-            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.Default))
+            using (StreamReader sr = new StreamReader(FilePath, Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.UTF8))
             {
                 while (!sr.EndOfStream)
                 {
@@ -296,9 +296,9 @@ namespace PVPlus.UI
 
             HashSet<string> distinctSet = new HashSet<string>();
 
-            using (StreamReader sr = new StreamReader(FilePath, Encoding.Default))
-            using (StreamWriter sw1 = new StreamWriter(fi1.FullName, false, Encoding.Default))
-            using (StreamWriter sw2 = new StreamWriter(fi2.FullName, false, Encoding.Default))
+            using (StreamReader sr = new StreamReader(FilePath, Encoding.UTF8))
+            using (StreamWriter sw1 = new StreamWriter(fi1.FullName, false, Encoding.UTF8))
+            using (StreamWriter sw2 = new StreamWriter(fi2.FullName, false, Encoding.UTF8))
             {
                 while (!sr.EndOfStream)
                 {
@@ -334,8 +334,8 @@ namespace PVPlus.UI
             DirectoryInfo di = CreatetDirectory(type);
             FileInfo fi = CreateFileInfo(type, di);
 
-            using (StreamReader sr = new StreamReader(FilePath, Encoding.Default))
-            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.Default))
+            using (StreamReader sr = new StreamReader(FilePath, Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter(fi.FullName, false, Encoding.UTF8))
             {
                 while (!sr.EndOfStream)
                 {
@@ -457,7 +457,7 @@ namespace PVPlus.UI
             string currentKey = "_Default";
             int newLineLen = GetNewLineLen(FilePath);
 
-            using (StreamReader sr = new StreamReader(FilePath, Encoding.Default))
+            using (StreamReader sr = new StreamReader(FilePath, Encoding.UTF8))
             {
                 while (!sr.EndOfStream)
                 {
@@ -478,7 +478,7 @@ namespace PVPlus.UI
                     }
 
                     preKey = currentKey;
-                    bytePos += Encoding.Default.GetByteCount(line) + newLineLen;
+                    bytePos += Encoding.UTF8.GetByteCount(line) + newLineLen;
                     linePos++;
 
                     if (linePos % 100000 == 0)
@@ -488,7 +488,7 @@ namespace PVPlus.UI
                 }
             }
 
-            using (StreamWriter sw = new StreamWriter(IndexFilePath, false, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(IndexFilePath, false, Encoding.UTF8))
             {
                 List<string> items = indexDic.Keys.OrderBy(x => x).ToList();
                 items.ForEach(x => sw.WriteLine(x + "|" + string.Join(",", indexDic[x])));
@@ -500,7 +500,7 @@ namespace PVPlus.UI
         {
             if (!Exist) return;
 
-            using (StreamReader sr = new StreamReader(IndexFilePath, Encoding.Default))
+            using (StreamReader sr = new StreamReader(IndexFilePath, Encoding.UTF8))
             {
                 while (!sr.EndOfStream)
                 {
@@ -517,7 +517,7 @@ namespace PVPlus.UI
             {
                 byte[] buffer = new byte[100000];
                 fs.Read(buffer, 0, 100000);
-                string str = Encoding.Default.GetString(buffer);
+                string str = Encoding.UTF8.GetString(buffer);
 
                 if (str.Contains('\r') && str.Contains('\n')) return 2;
                 else return 1;
@@ -531,7 +531,7 @@ namespace PVPlus.UI
             List<string> result = new List<string>();
             List<long> posList = Index[key].Split(',').Select(x => long.Parse(x)).ToList();
 
-            using (StreamReader sr = new StreamReader(_fi.FullName, Encoding.Default))
+            using (StreamReader sr = new StreamReader(_fi.FullName, Encoding.UTF8))
             {
                 foreach (long pos in posList)
                 {
@@ -578,7 +578,7 @@ namespace PVPlus.UI
 
             if (Exist && GetKey != null)
             {
-                using (StreamReader sr = new StreamReader(FilePath, Encoding.Default))
+                using (StreamReader sr = new StreamReader(FilePath, Encoding.UTF8))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -616,7 +616,7 @@ namespace PVPlus.UI
                 {
                     if (!new FileInfo(path).Exists) { continue; }
 
-                    using (StreamReader sr = new StreamReader(path, Encoding.Default))
+                    using (StreamReader sr = new StreamReader(path, Encoding.UTF8))
                     {
                         while (!sr.EndOfStream)
                         {
@@ -707,7 +707,7 @@ namespace PVPlus.UI
 
         public void W(string item)
         {
-            using (StreamWriter sw = new StreamWriter(Path, true, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(Path, true, Encoding.UTF8))
             {
                 sw.WriteLine(item);
             }
@@ -715,7 +715,7 @@ namespace PVPlus.UI
 
         public void W(List<string> items)
         {
-            using (StreamWriter sw = new StreamWriter(Path, true, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(Path, true, Encoding.UTF8))
             {
                 items.ForEach(x => sw.WriteLine(x));
             }
@@ -723,7 +723,7 @@ namespace PVPlus.UI
 
         public void W<T>(T item)
         {
-            using (StreamWriter sw = new StreamWriter(Path, true, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(Path, true, Encoding.UTF8))
             {
                 sw.WriteLine(AutoMapper.ClassToString(item));
             }
@@ -731,7 +731,7 @@ namespace PVPlus.UI
 
         public void W<T>(List<T> items)
         {
-            using (StreamWriter sw = new StreamWriter(Path, true, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(Path, true, Encoding.UTF8))
             {
                 AutoMapper.ClassListToStringList(items).ForEach(x => sw.WriteLine(x));
             }
@@ -851,7 +851,7 @@ namespace PVPlus.UI
         {
             List<T> result = new List<T>();
 
-            using (StreamReader sr = new StreamReader(filePath, Encoding.Default))
+            using (StreamReader sr = new StreamReader(filePath, Encoding.UTF8))
             {
                 //layout null when firstline is a layout.
                 if (layout == null)
@@ -932,7 +932,7 @@ namespace PVPlus.UI
         {
             DirectoryInfo di = new DirectoryInfo(diPath);
             List<FileInfo> fiList = di.GetFiles().ToList();
-            using (StreamWriter sw = new StreamWriter(string.Format(@"{0}\{1}", di.FullName, "FileNames.txt"), false, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(string.Format(@"{0}\{1}", di.FullName, "FileNames.txt"), false, Encoding.UTF8))
             {
                 fiList.ForEach(x => sw.WriteLine(x.Name.Replace(x.Extension, "")));
             }
@@ -945,11 +945,11 @@ namespace PVPlus.UI
             FileInfo[] fis = di.GetFiles(searchPattern);
             string outPath = Path.Combine(di.FullName, "sum.txt");
 
-            using (StreamWriter sw = new StreamWriter(outPath, false, Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(outPath, false, Encoding.UTF8))
             {
                 foreach (FileInfo fi in fis)
                 {
-                    using (StreamReader sr = new StreamReader(fi.FullName, Encoding.Default))
+                    using (StreamReader sr = new StreamReader(fi.FullName, Encoding.UTF8))
                     {
                         for (int i = 0; i < skip; i++)
                         {

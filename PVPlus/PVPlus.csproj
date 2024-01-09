@@ -38,6 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -252,6 +253,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TextModifier\AIGTextModifier.resx">
       <DependentUpon>AIGTextModifier.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TextModifier\SamsungTextModifyForm.resx">
       <DependentUpon>SamsungTextModifyForm.cs</DependentUpon>
