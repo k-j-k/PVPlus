@@ -30,7 +30,7 @@ namespace PVPlus.PVCALCULATOR
             }
             else
             {
-                NP = (NNx_유지자 - NNx_납입자) / (payCnt * NNx_납입자);
+                NP = (NNx_유지자 - NNx_납입자) / (NNx_납입자);
             }
 
             return NP;
