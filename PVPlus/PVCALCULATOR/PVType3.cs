@@ -21,16 +21,17 @@ namespace PVPlus.PVCALCULATOR
             double NP = 0;
             double payCnt = Get연납입횟수(freq);
 
-            double NNx_월납입자 = GetNNx(c.Nx_납입자, c.Dx_납입자, 1, 0, m);
-            double NNx_월유지자 = GetNNx(c.Nx_유지자, c.Dx_유지자, 1, 0, m);
+            double NNx_월납입자 = GetNNx(c.Nx_납입자, c.Dx_납입자, 1, 0, n);
+            double NNx_월유지자 = GetNNx(c.Nx_유지자, c.Dx_유지자, 1, 0, n);
             double NNx_납입자 = GetNNx(c.Nx_납입자, c.Dx_납입자, freq, 0, m);
+
             if (freq == 99)
             {
                 NP = (c.Mx_급부[0] - c.Mx_급부[n]) / c.Dx_납입자[0];
             }
             else
             {
-                NP = (NNx_월유지자 - NNx_월납입자) / NNx_납입자 * payCnt;
+                NP = (NNx_월유지자 - NNx_월납입자) / NNx_납입자 * (12.0 / payCnt);
             }
 
             return NP;
