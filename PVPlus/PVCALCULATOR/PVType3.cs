@@ -10,7 +10,7 @@ namespace PVPlus.PVCALCULATOR
 {
     public class PVType3 : PVCalculator
     {
-        //보험료 납입면제 특약
+        //월만기형 모성담보, 0시점 위험률 Rate[0]값을 순보험료로 사용
         public PVType3(LineInfo line) : base(line)
         {
 
@@ -21,16 +21,16 @@ namespace PVPlus.PVCALCULATOR
             double NP = 0;
             double payCnt = Get연납입횟수(freq);
 
+            double NNx_월납입자 = GetNNx(c.Nx_납입자, c.Dx_납입자, 1, 0, m);
+            double NNx_월유지자 = GetNNx(c.Nx_유지자, c.Dx_유지자, 1, 0, m);
             double NNx_납입자 = GetNNx(c.Nx_납입자, c.Dx_납입자, freq, 0, m);
-            double NNx_유지자 = GetNNx(c.Nx_유지자, c.Dx_유지자, freq, 0, m);
-
             if (freq == 99)
             {
                 NP = (c.Mx_급부[0] - c.Mx_급부[n]) / c.Dx_납입자[0];
             }
             else
             {
-                NP = (NNx_유지자 - NNx_납입자) / (NNx_납입자);
+                NP = (NNx_월유지자 - NNx_월납입자) / NNx_납입자 * payCnt;
             }
 
             return NP;
@@ -62,6 +62,11 @@ namespace PVPlus.PVCALCULATOR
             }
 
             return 분자 / 분모;
+        }
+
+        public double Get정기위험보험료(int n, int m, int t, int freq)
+        {
+            return base.Get순보험료(n, m, t, freq);
         }
     }
 
