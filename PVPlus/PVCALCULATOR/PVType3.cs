@@ -10,7 +10,7 @@ namespace PVPlus.PVCALCULATOR
 {
     public class PVType3 : PVCalculator
     {
-        //월만기형 모성담보, 0시점 위험률 Rate[0]값을 순보험료로 사용
+        //보험료 납입면제 특약
         public PVType3(LineInfo line) : base(line)
         {
 
@@ -30,7 +30,7 @@ namespace PVPlus.PVCALCULATOR
             }
             else
             {
-                NP = (NNx_유지자 - NNx_납입자) / NNx_납입자;
+                NP = (NNx_유지자 - NNx_납입자) / (payCnt * NNx_납입자);
             }
 
             return NP;

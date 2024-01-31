@@ -161,7 +161,8 @@ namespace PVPlus
 
         public static double PrTerm(int freq)
         {
-            Dictionary<string, object> otherVariables = new Dictionary<string, object>() { };
+            Dictionary<string, object> otherVariables = new Dictionary<string, object>() { { "PV_Type", 1 } };
+            
             PVCalculator calTerm = lineInfo.GetPVCalculator("정기사망", otherVariables);
 
             int n = (int)variables["n"];
@@ -172,7 +173,7 @@ namespace PVPlus
 
         public static double PrTerm(int age, int n, int m, int freq)
         {
-            Dictionary<string, object> otherVariables = new Dictionary<string, object>() { { "Age", age }, { "n", n }, { "m", m }, { "Freq", freq } };
+            Dictionary<string, object> otherVariables = new Dictionary<string, object>() { { "Age", age }, { "n", n }, { "m", m }, { "Freq", freq }, { "PV_Type", 1 } };
             PVCalculator calTerm = lineInfo.GetPVCalculator("정기사망", otherVariables);
 
             return calTerm.Get위험보험료(n, m, 0, freq);
