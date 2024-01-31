@@ -10,7 +10,7 @@ namespace PVPlus.PVCALCULATOR
 {
     public class PVType3 : PVCalculator
     {
-        //월만기형 모성담보, 0시점 위험률 Rate[0]값을 순보험료로 사용
+        //납입면제특약
         public PVType3(LineInfo line) : base(line)
         {
 
@@ -63,11 +63,6 @@ namespace PVPlus.PVCALCULATOR
             }
 
             return 분자 / 분모;
-        }
-
-        public double Get정기위험보험료(int n, int m, int t, int freq)
-        {
-            return base.Get순보험료(n, m, t, freq);
         }
     }
 
