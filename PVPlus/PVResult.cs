@@ -266,6 +266,7 @@ namespace PVPlus
             int t = (int)variables["ElapseYear"];
             int freq = (int)variables["Freq"];
 
+            cal.Min_S = sInfo.Min_S; 
             Dict["Amount"] = cal.가입금액;
             Dict["GP"] = cal.Eval("GP6", n, m, t, 1);
             Dict["STDNP"] = cal.Eval("STDNP_UNIT", n, m, t, 12) * Dict["Amount"];
@@ -340,7 +341,7 @@ namespace PVPlus
 
             if (freq == 0) freq = 1;
 
-            Dict["Min_S"] = cal.Min_s;
+            Dict["Min_S"] = cal.Min_S;
             Dict["ALPHA"] = cal.Eval("ALPHA", n, m, t, freq);
             Dict["STDALPHA"] = cal.Eval("STDALPHA", n, m, t, freq);
 

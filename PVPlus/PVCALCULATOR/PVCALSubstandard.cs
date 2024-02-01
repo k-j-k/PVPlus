@@ -29,7 +29,7 @@ namespace PVPlus.PVCALCULATOR
             companyRule = Configure.CompanyRule;
 
             가입금액 = (double)variables["Amount"];
-            Min_s = 0;
+            Min_S = 0;
 
             helper.cal = this;
         }

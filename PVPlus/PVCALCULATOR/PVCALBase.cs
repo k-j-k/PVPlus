@@ -29,7 +29,7 @@ namespace PVPlus.PVCALCULATOR
         public PVCalculator stdCalofLCSV;   //저해지의 표준형
 
         public double 가입금액;
-        public double Min_s;    //표준해약공제액 계산을 위한 가입금액
+        public double Min_S;    //표준해약공제액 계산을 위한 가입금액
 
         public Dictionary<string, object> LocalVariables { get; set; }
         public string Generators { get; set; }
@@ -49,7 +49,7 @@ namespace PVPlus.PVCALCULATOR
 
             ex = FindExpense();
             가입금액 = (double)variables["Amount"];
-            Min_s = PV.finder.FindMin_S(riderRule.SKeyExpr.Evaluate());
+            Min_S = PV.finder.FindMin_S(riderRule.SKeyExpr.Evaluate());
 
             //납입기간이 m일 때와 Min(20,n)일때 기수표가 달라지는 경우(납기별 해지율 및 기납입보험료 환급 등)
             if ((int)variables["S3"] > 0)
@@ -208,7 +208,7 @@ namespace PVPlus.PVCALCULATOR
             if (chkItem == "BETANP") return GetBeta순보험료(n, m, t, freq);
             if (chkItem == "GP") return Get영업보험료(n, m, t, freq);
             if (chkItem == "V") return Get준비금(n, m, t, freq);
-            if (chkItem == "Min_S") return Min_s;
+            if (chkItem == "Min_S") return Min_S;
 
             helper.cal = this;
 
