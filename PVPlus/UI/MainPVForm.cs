@@ -204,20 +204,56 @@ namespace PVPlus
                 SetConfigure();
                 Configure.TableType = TableType.SRatio;
 
-                lblStatus.Text = "S산출중...";
+                pv = new PV(this);
+                startTime = DateTime.Now;
+                timer1.Enabled = true;
 
                 var SCalTask = Task.Run(() =>
                 {
-                    new PV(this).EvaluateSInfo();
+                    pv.EvaluateSInfo();
                 });
                 await SCalTask;
-
-                lblStatus.Text = "";
-                textBoxStatus.AppendText($"{Configure.ProductCode} S산출완료." + '\n');
             }
             catch (Exception ex)
             {
                 ReportExeption(ex);
+            }
+            finally
+            {
+                timer1.Enabled = false;
+                textBoxStatus.AppendText($"S비율({textBoxProduct.Text}): {lblStatus.Text}, 걸린시간: {lblTime.Text}\n");
+                lblStatus.Text = "";
+                lblTime.Text = "";
+            }
+        }
+
+        private async void ExcessLimitChkBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SetConfigure();
+                Configure.TableType = TableType.SRatio;
+
+                pv = new PV(this);
+                startTime = DateTime.Now;
+                timer1.Enabled = true;
+
+                var SCalTask = Task.Run(() =>
+                {
+                    pv.CheckExcess();
+                });
+                await SCalTask;
+            }
+            catch (Exception ex)
+            {
+                ReportExeption(ex);
+            }
+            finally
+            {
+                timer1.Enabled = false;
+                textBoxStatus.AppendText($"신계약비 한도({textBoxProduct.Text}): {lblStatus.Text}, 걸린시간: {lblTime.Text}\n");
+                lblStatus.Text = "";
+                lblTime.Text = "";
             }
         }
 
@@ -401,30 +437,6 @@ namespace PVPlus
                 }
             }
             catch(Exception ex)
-            {
-                ReportExeption(ex);
-            }
-        }
-
-        private async void ExcessLimitChkBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                SetConfigure();
-                Configure.TableType = TableType.SRatio;
-
-                lblStatus.Text = "한도 계산중...";
-
-                var SCalTask = Task.Run(() =>
-                {
-                    new PV(this).CheckExcess();
-                });
-                await SCalTask;
-
-                lblStatus.Text = "";
-                textBoxStatus.AppendText($"{Configure.ProductCode} 한도계산완료." + '\n');
-            }
-            catch (Exception ex)
             {
                 ReportExeption(ex);
             }

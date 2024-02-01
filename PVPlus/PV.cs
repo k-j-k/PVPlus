@@ -140,6 +140,9 @@ namespace PVPlus
                 List<SInfo> sList = reader.ReadSInfos();
                 var sDict = sList.OrderBy(x => x.VarAdd.Contains("S5->2")).GroupBy(x => x.SKey);
 
+                int cnt = 0;
+                int total = sList.Count();
+
                 foreach (var sl in sDict)
                 {
                     foreach (SInfo s in sl)
@@ -154,6 +157,11 @@ namespace PVPlus
                         {
                             s.ErrorMessage = ex.Message.Replace("\r", "").Replace("\n", " ");
                         }
+                        finally
+                        {
+                            cnt++;
+                            ProgressMsg = $"\r진행도:{cnt}/{total}";
+                        }
                     }
 
                     finder.minSByMinSKey[sl.Key] = sl.Min(x => x.S);
@@ -161,6 +169,7 @@ namespace PVPlus
                 }
 
                 reader.GenerateEvaluatedSInfosText(sList);
+                System.Threading.Thread.Sleep(100); //타이머 이벤트 종료대기
             }
             catch (Exception ex)
             {
@@ -219,6 +228,7 @@ namespace PVPlus
                 StreamWriter swAlphaExcessCheck = new StreamWriter(ExcessFI.FullName, false, Encoding.UTF8);
 
                 int cnt = 0;
+                int total = sList.Count();
 
                 using (swAlphaExcessCheck)
                 {
@@ -243,7 +253,13 @@ namespace PVPlus
                             s.ErrorMessage = ex.Message.Replace("\r", "").Replace("\n", " ");
                             cnt++;
                         }
+                        finally
+                        {
+                            ProgressMsg = $"\r진행도:{cnt}/{total}";
+                        }
                     }
+
+                    System.Threading.Thread.Sleep(100); //타이머 이벤트 종료대기
                 }
             }
             catch (Exception ex)
