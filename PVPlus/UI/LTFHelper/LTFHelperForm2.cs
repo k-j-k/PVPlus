@@ -396,6 +396,11 @@ namespace PVPlus.UI
             return val.ToString();
         }
 
+        public string All(int n)
+        {
+            return string.Join("_", JoinLines[n]);
+        }
+
         public int Count(int n)
         {
             return JoinLines[n].Count();
@@ -1077,5 +1082,11 @@ namespace PVPlus.UI
         {
             return f.First(n, null);
         }
+
+        public static string All(int n)
+        {
+            return f.All(n);
+        }
+
     }
 }

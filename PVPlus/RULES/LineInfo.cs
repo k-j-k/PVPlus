@@ -325,9 +325,11 @@ namespace PVPlus.RULES
 
             if (substandardType > 0 && (string)variables["Substandard_Mode"] == "None")
             {
+                //위험률 1배 적용
                 variables["Substandard_Mode"] = "norm"; 
                 PVCalculator norm = GetPVCalculator();
 
+                //위험률 k배 적용 S(k)
                 variables["Substandard_Mode"] = "sub";
                 PVCalculator sub = GetPVCalculator();
 
