@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Reflection;
+using NuGet;
 
 namespace PVPlus
 {
@@ -198,10 +199,12 @@ namespace PVPlus
 
 
         //산출 값(다른 담보의 값)
+
         public static double Ax(string riderCode, int age, int n)
         {
             //일시납 보험료
             Dictionary<string, object> otherVariables = new Dictionary<string, object>() { { "Age", age }, { "n", n }, { "m", 0 }, { "Freq", 99 }, { "S3", 0 }, {"S5", 0 } };
+
             PVCalculator cal = lineInfo.GetPVCalculator(riderCode, otherVariables);
 
             return cal.Get순보험료(n, 0, 0, 99);
@@ -405,6 +408,21 @@ namespace PVPlus
         public static string ToString(object s)
         {
             return s.ToString();
+        }
+
+        public static int ToIntOrDefault(string s, int @default)
+        {
+            int number;
+            if (int.TryParse(s, out number))
+                return number;
+            return @default;
+        }
+        public static double ToDoubleOrDefault(string s, double @default)
+        {
+            double number;
+            if (double.TryParse(s, out number))
+                return number;
+            return @default;
         }
 
         public static int ToInt(object item, string items)
@@ -758,4 +776,43 @@ namespace PVPlus
 
         #endregion
     }
+
 }
+
+
+//기수표 sketch
+/* Lx("Inforce", t)
+ * Dx("Inforce", t)
+ * Nx("Inforce", t)
+ * Cx("Inforce", t)
+ * Mx("Inforce", t)
+ * 
+ * Lx("Payment", t)
+ * Dx("Payment", t)
+ * Nx("Payment", t)
+ * Cx("Payment", t)
+ * Mx("Payment", t)
+ * 
+ * Lx("Waiver", t)
+ * Dx("Waiver", t)
+ * Nx("Waiver", t)
+ * Cx("Waiver", t)
+ * Mx("Waiver", t)
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */

@@ -10,7 +10,7 @@ namespace PVPlus.RULES
     public class CommutationTable
     {
         public const int MAXSIZE = 131; // 0~130
-
+                           
         public CommutationTable()
         {
             n = (int)PV.variables["n"];
@@ -71,7 +71,7 @@ namespace PVPlus.RULES
         public List<double[]> LxSegments_유지자 { get; set; } = new List<double[]>();
         public List<double[]> CxSegments_급부 { get; set; } = new List<double[]>();
         public List<double[]> MxSegments_급부 { get; set; } = new List<double[]>();
-
+                          
         protected int n;
         protected double i;
         protected double v;

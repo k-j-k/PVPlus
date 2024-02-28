@@ -108,6 +108,7 @@
     <Compile Include="PVCALCULATOR\PVType95.cs" />
     <Compile Include="PVCALCULATOR\PVType96.cs" />
     <Compile Include="PVCALCULATOR\PVType97.cs" />
+    <Compile Include="PVCALCULATOR\PVType999.cs" />
     <Compile Include="RULES\ChkExprs.cs" />
     <Compile Include="RULES\CommutationTable.cs" />
     <Compile Include="RULES\CompanyRule.cs" />
