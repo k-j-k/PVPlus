@@ -47,6 +47,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.labelHelp = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // labelSamP
@@ -202,15 +203,25 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(26, 225);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(617, 12);
+            this.label1.Size = new System.Drawing.Size(657, 12);
             this.label1.TabIndex = 16;
-            this.label1.Text = "매칭작업은 SubString(0,8) 위치의 식별번호가 일치 할 때 P테이블 라인을 맨앞에 붙여넣는 방식으로 진행 됩니다.";
+            this.label1.Text = "매칭작업은 SubString(              ) 위치의 식별번호가 일치 할 때 P테이블 라인을 맨앞에 붙여넣는 방식으로 진행 됩니다.";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(155, 220);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBox1.Size = new System.Drawing.Size(49, 21);
+            this.textBox1.TabIndex = 17;
+            this.textBox1.Text = "0,8";
             // 
             // SamsungTextModifierForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 260);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelHelp);
             this.Controls.Add(this.buttonBack);
@@ -257,5 +268,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label labelHelp;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

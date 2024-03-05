@@ -100,6 +100,7 @@
     <Compile Include="PVCALCULATOR\PVType13.cs" />
     <Compile Include="PVCALCULATOR\PVType15.cs" />
     <Compile Include="PVCALCULATOR\PVType16.cs" />
+    <Compile Include="PVCALCULATOR\PVType17.cs" />
     <Compile Include="PVCALCULATOR\PVType2.cs" />
     <Compile Include="PVCALCULATOR\PVType3.cs" />
     <Compile Include="PVCALCULATOR\PVType92.cs" />

@@ -91,7 +91,17 @@ namespace PVPlus
             string T = textBoxTPath.Text == "" ? null : textBoxTPath.Text;
             string E = textBoxEPath.Text == "" ? null : textBoxEPath.Text;
 
-            converter = new SamsungTableConverter(P, V, T, E);
+            try
+            {
+                converter = new SamsungTableConverter(P, V, T, E);
+                converter.Start = int.Parse(textBox1.Text.Split(',')[0]);
+                converter.End = int.Parse(textBox1.Text.Split(',')[1]);
+            }
+            catch
+            {
+                labelProgress.Text = "오류 발생 substring 위치를 확인 해 주세요. ex - 0,8";
+            }
+
 
             timer1.Enabled = true;
             Task t = Task.Run(() => converter.ConvertAll());
@@ -126,6 +136,9 @@ namespace PVPlus
     class SamsungTableConverter
     {
         public string ProgressMessage { get; set; }
+
+        public int Start { get; set; }
+        public int End { get; set; }
 
         private FileInfo PPath;
         private FileInfo VPath;
@@ -195,7 +208,7 @@ namespace PVPlus
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
-                    string PID = line.Substring(0, 8);
+                    string PID = line.Substring(Start, End);
                     dict[PID] = line;
                 }
             }
@@ -211,7 +224,7 @@ namespace PVPlus
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
-                    string PID = line.Substring(0, 8);
+                    string PID = line.Substring(Start, End);
 
                     if (!dict.ContainsKey(PID))
                     {
@@ -240,7 +253,7 @@ namespace PVPlus
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
-                    string PID = line.Substring(0, 8);
+                    string PID = line.Substring(Start, End);
 
                     if (!dict.ContainsKey(PID))
                     {
@@ -269,7 +282,7 @@ namespace PVPlus
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
-                    string PID = line.Substring(0, 8);
+                    string PID = line.Substring(Start, End);
 
                     if (!dict.ContainsKey(PID))
                     {
