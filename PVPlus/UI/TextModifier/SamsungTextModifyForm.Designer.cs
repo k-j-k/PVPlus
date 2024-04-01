@@ -43,7 +43,6 @@
             this.buttonOpenEPath = new System.Windows.Forms.Button();
             this.buttonConvert = new System.Windows.Forms.Button();
             this.labelProgress = new System.Windows.Forms.Label();
-            this.buttonBack = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.labelHelp = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -173,16 +172,6 @@
             this.labelProgress.TabIndex = 13;
             this.labelProgress.Text = "진행: ";
             // 
-            // buttonBack
-            // 
-            this.buttonBack.Location = new System.Drawing.Point(644, 12);
-            this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(86, 22);
-            this.buttonBack.TabIndex = 14;
-            this.buttonBack.Text = "Back";
-            this.buttonBack.UseVisualStyleBackColor = true;
-            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
-            // 
             // timer1
             // 
             this.timer1.Interval = 10;
@@ -224,7 +213,6 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelHelp);
-            this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.labelProgress);
             this.Controls.Add(this.buttonConvert);
             this.Controls.Add(this.buttonOpenEPath);
@@ -264,7 +252,6 @@
         private System.Windows.Forms.Button buttonOpenEPath;
         private System.Windows.Forms.Button buttonConvert;
         private System.Windows.Forms.Label labelProgress;
-        private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label labelHelp;
         private System.Windows.Forms.Label label1;

@@ -95,6 +95,8 @@
     <Compile Include="PVCALCULATOR\PVCALBase.cs" />
     <Compile Include="PVCALCULATOR\PVType101.cs" />
     <Compile Include="PVCALCULATOR\PVType102.cs" />
+    <Compile Include="PVCALCULATOR\PVType103.cs" />
+    <Compile Include="PVCALCULATOR\PVType104.cs" />
     <Compile Include="PVCALCULATOR\PVType11.cs" />
     <Compile Include="PVCALCULATOR\PVType12.cs" />
     <Compile Include="PVCALCULATOR\PVType13.cs" />

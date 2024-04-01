@@ -5,6 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Test
 {
@@ -12,6 +15,7 @@ namespace Test
     {
         static void Main(string[] args)
         {
+
             string ver = typeof(PVPlus.MainPVForm).Assembly.GetName().Version.ToString(3);
 
             string command1 = $@"nuget pack PVPlus.nuspec -Version {ver} -Properties Configuration=Release -BasePath PVPlus\bin\Release\;";
@@ -44,5 +48,14 @@ namespace Test
                 String text = reader.ReadToEnd();
             }
         }
+
+        // If you want to implement both "*" and "?"
+        private static String WildCardToRegular(String value)
+        {
+            return "^" + Regex.Escape(value).Replace("\\?", ".").Replace("\\*", ".*") + "$";
+        }
+
+
+
     }
 }

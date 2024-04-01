@@ -54,17 +54,16 @@ namespace PVPlus
             {
                 double val_org = (double)variables[c];
                 double val_cal = GetCheckItemValue(c);
-
-                if (val_org == 0) val_cal = 0;
-
                 double val_diff = val_org - val_cal;
 
-                if (double.IsNaN(val_cal)) val_diff = 999999;
+                if (double.IsNaN(val_cal)) val_diff = double.NaN;
 
                 Org_Cal_Diff[c] = new double[3] { val_org, val_cal, val_diff };
             }
 
             ResultType = "정상";
+
+            List<bool> Results = new List<bool>();
 
             foreach (var checkResult in Org_Cal_Diff)
             {
@@ -72,9 +71,17 @@ namespace PVPlus
                 double calculatedValue = checkResult.Value[1];
                 double difference = checkResult.Value[2];
 
-                if (Math.Abs(difference) >= 1) ResultType = "오차";
-                if ((checkResult.Key == "GP6" || checkResult.Key == "GP0") && checkResult.Value[0] == 0) ResultType = "오차";
+                bool result = true;
+
+                if (Math.Abs(difference) >= 1 || double.IsNaN(difference)) result = false;   //차이가 1이상일 경우 -> 오차
+                if (checkResult.Value[0] == 0) result = true;   //org값이 0일 경우 -> 정상
+                if ((checkResult.Key == "GP6" || checkResult.Key == "GP0") && checkResult.Value[0] == 0) result = false; //월납영업보험료가 0일경우 -> 오차
+
+                Results.Add(result);
             }
+
+            if(Results.All(x => x == true)) ResultType = "정상";
+            else ResultType = "오차";
         }
 
         public double GetCheckItemValue(string checkItem)

@@ -375,12 +375,11 @@ namespace PVPlus.RULES
 
             //RiderRule, Variables 변경
             if (otherRiderCode != null) RiderCode = otherRiderCode;
-            variables["RiderCode"] = RiderCode;
 
             //다른 담보의 변수를 끌어 올때 Ax메서드 등의 입력파라미터 뿐만 아니라 VarChg변수까지 적용
             //다른 담보의 Layout변수의 경우 상위담보의 Layout과 충돌가능성이 있어 제외하였음
             otherVariables.Keys.ToList().ForEach(x => variables[x] = otherVariables[x]);
-            ChangeVariables();
+            //ChangeVariables();
 
             string PVGenKey = GetPVGeneratorKey();
             PVCalculator cal;

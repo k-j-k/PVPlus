@@ -708,15 +708,25 @@ namespace PVPlus.UI
                     IDynamicExpression exprPrimary = Compile(SortOptForm.GetExpressions()[0]);
                     LTFHelper = new LTFReader(path, x => GetValue(exprPrimary, x).ToString());
 
-                    timer1.Enabled = true;
+                    Task.Run(() =>
+                    {
+                        try
+                        {
+                            this.Invoke(new Action(() => timer1.Enabled = true));
+                            this.Invoke(new Action(() => labelProgress.Text = "Index생성중"));
+                            this.Invoke(new Action(() => LTFHelper.GenerateIndexTable()));
+                            this.Invoke(new Action(() => LTFHelper.LoadIndexTable()));
+                            this.Invoke(new Action(() => LTFHelper.Sort(x => orderFunc(x))));
+                            this.Invoke(new Action(() => timer1.Enabled = false));
+                            this.Invoke(new Action(() => textBoxProgress.Text = "Sort 완료"));
+                        }
+                        catch (Exception ex)
+                        {
+                            this.Invoke(new Action(() => timer1.Enabled = false));
+                            this.Invoke(new Action(() => textBoxProgress.Text = ex.Message));
+                        }
 
-                    Task.Run(() => labelProgress.Invoke(new Action(() => labelProgress.Text = "Index생성중")))
-                        .ContinueWith(t => LTFHelper.GenerateIndexTable())
-                        .ContinueWith(t => LTFHelper.LoadIndexTable())
-                        .ContinueWith(t => timer1.Enabled = true)
-                        .ContinueWith(t => LTFHelper.Sort(x => orderFunc(x)))
-                        .ContinueWith(t => timer1.Enabled = false)
-                        .ContinueWith(t => textBoxProgress.Invoke(new Action(() => textBoxProgress.Text = "Sort 완료")));
+                    });
                 }
 
                 if (comboBox1.SelectedItem.ToString() == "Select")

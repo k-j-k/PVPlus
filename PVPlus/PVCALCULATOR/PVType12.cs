@@ -70,7 +70,7 @@ namespace PVPlus.PVCALCULATOR
 
         public override double GetBeta순보험료(int n, int m, int t, int freq)
         {
-            return Get순보험료(n, m, t, freq) + Get영업보험료(n, m, t, freq) * GetBeta보험료(n, m, t, freq);
+            return Get순보험료(n, m, t, freq) + Get연납입횟수(freq) * Get영업보험료(n, m, t, freq) * GetBeta보험료(n, m, t, freq);
         }
 
         public double GetBeta보험료(int n, int m, int t, int freq)

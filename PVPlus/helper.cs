@@ -203,7 +203,7 @@ namespace PVPlus
         public static double Ax(string riderCode, int age, int n)
         {
             //일시납 보험료
-            Dictionary<string, object> otherVariables = new Dictionary<string, object>() { { "Age", age }, { "n", n }, { "m", 0 }, { "Freq", 99 }, { "S3", 0 }, {"S5", 0 } };
+            Dictionary<string, object> otherVariables = new Dictionary<string, object>() { { "Age", age }, {"F5", age }, { "n", n }, { "m", 0 }, { "Freq", 99 }, { "S3", 0 }, {"S5", 0 } };
 
             PVCalculator cal = lineInfo.GetPVCalculator(riderCode, otherVariables);
 
@@ -236,7 +236,7 @@ namespace PVPlus
         public static double V(string riderCode, int age, int n, int m, int freq, int t)
         {
             //준비금
-            Dictionary<string, object> otherVariables = new Dictionary<string, object>() { { "Age", age }, { "n", n }, { "m", m } };
+            Dictionary<string, object> otherVariables = new Dictionary<string, object>() { { "Age", age }, { "F5", age }, { "n", n }, { "m", m } };
             PVCalculator cal = lineInfo.GetPVCalculator(riderCode, otherVariables);
 
             return cal.Get준비금(n, m, t, freq);
@@ -309,6 +309,17 @@ namespace PVPlus
 
             return W;
         }
+
+        public static double GP(int freq)
+        {
+            if (stdCalofLCSV == null || (int)variables["S5"] == 0) return 0;
+
+            int n = (int)variables["n"];
+            int m = (int)variables["m"];
+            double GP = stdCalofLCSV.Eval("GP_UNIT", n, m, 0, freq);
+            return GP;
+        }
+
 
         #region Round, Min/Max
 
@@ -466,7 +477,7 @@ namespace PVPlus
                 if (items[i].ToString() == item.ToString()) return i + 1;
             }
 
-            throw new Exception($"IndexOf({item}, {string.Join(",", items)}) 함수의 인덱스를 찾을 수 없습니다.");
+            return -1;
         }
 
         public static double Ifs(Boolean condition1, double val1, double dafaultVal)

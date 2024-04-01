@@ -291,6 +291,7 @@ namespace PVPlus.RULES
             Context.Variables["BETANP6"] = 0.0;
 
             Context.Variables["STDNP"] = 0.0;
+            Context.Variables["AP"] = 0.0;
 
             Context.Variables["GP0"] = 0.0;
             Context.Variables["GP1"] = 0.0;

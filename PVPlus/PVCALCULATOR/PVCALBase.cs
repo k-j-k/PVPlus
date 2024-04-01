@@ -182,6 +182,21 @@ namespace PVPlus.PVCALCULATOR
 
             return 분자 / 분모;
         }
+        public virtual double Get자연식위험보험료(int n, int m, int t, int freq)
+        {
+            double payCnt = Get연납입횟수(freq);
+            double V0 = Get준비금(n, m, t, freq);
+            double V1 = Get준비금(n, m, t + 1, freq);
+            double v = c.Rate_할인율[t];
+            double w = c.Rate_해지율[t];
+            double PBeta = GetBeta순보험료(n, m, t, 12);
+
+            double AP = (PBeta - (v * V1 - V0) - (w * v * V1) ) / 12;
+
+            return AP;
+
+            //return c.RateSegments_급부.Sum(x => x[t]) / payCnt * Math.Pow(c.Rate_할인율[t], 0.5);
+        }
 
         public virtual double Get예정신계약비(int n, int m, int t, int freq)
         {
@@ -204,6 +219,7 @@ namespace PVPlus.PVCALCULATOR
         {
             if (chkItem == "NP") return Get순보험료(n, m, t, freq);
             if (chkItem == "RP") return Get위험보험료(n, m, t, freq);
+            if (chkItem == "AP") return Get자연식위험보험료(n, m, t, freq);
             if (chkItem == "STDNP") return Get기준연납순보험료(n, m, t, freq);
             if (chkItem == "BETANP") return GetBeta순보험료(n, m, t, freq);
             if (chkItem == "GP") return Get영업보험료(n, m, t, freq);

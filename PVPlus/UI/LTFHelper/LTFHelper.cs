@@ -457,7 +457,7 @@ namespace PVPlus.UI
             string currentKey = "_Default";
             int newLineLen = GetNewLineLen(FilePath);
 
-            using (StreamReader sr = new StreamReader(FilePath, Encoding.UTF8))
+            using (StreamReader sr = new StreamReader(FilePath, Encoding.Default))
             {
                 while (!sr.EndOfStream)
                 {
@@ -478,7 +478,8 @@ namespace PVPlus.UI
                     }
 
                     preKey = currentKey;
-                    bytePos += Encoding.UTF8.GetByteCount(line) + newLineLen;
+                    int lineSize = Encoding.UTF8.GetByteCount(line);
+                    bytePos += lineSize + newLineLen;
                     linePos++;
 
                     if (linePos % 100000 == 0)
